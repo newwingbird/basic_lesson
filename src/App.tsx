@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <header className="App-header">
         <h4>{status}</h4>
         <button onClick={() => setStatus(1)}>
-          Buttton
+          Button
         </button>
         <h4>{input}</h4>
         <input type="text" value={input} onChange={onChangehandler} />
