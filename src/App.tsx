@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import CleanUp from './CleanUp';
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<string | number>('text');
   const [input, setInput] = useState('')
   const [counter, setCounter] = useState(0);
+  const [display, setDisplay] = useState(true);
 
   const onChangehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -13,7 +15,7 @@ const App: React.FC = () => {
   useEffect(() =>{
     console.log("useEffect in app invoked !");
     document.title = `current value is ${counter}`;
-  });
+  },[counter]);
   return (
     <div className="App">
       <header className="App-header">
@@ -24,10 +26,12 @@ const App: React.FC = () => {
         <h4>{input}</h4>
         <input type="text" value={input} onChange={onChangehandler} />
         <h4>{counter}</h4>
-        <button onClick={() => setCounter((preCounter)=>preCounter+1)}>
+        <button onClick={() => setCounter((preCounter) => preCounter + 1)}>
           Increment
         </button>
-        <Counter />
+        {display && <CleanUp/>}
+        <button onClick={() => setDisplay(!display)}>Toggle display</button>
+        <Counter/> 
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
